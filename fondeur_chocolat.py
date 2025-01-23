@@ -7,7 +7,7 @@ class FondeurChocolat(threading.Thread):
 
     def __init__(self, quantite):
         threading.Thread.__init__(self)
-        self.quantite = quantite # en grammes
+        self.quantite = quantite  # en grammes
 
     def run(self):
         print("Je mets de l'eau à chauffer dans une bouilloire")
@@ -18,5 +18,5 @@ class FondeurChocolat(threading.Thread):
         time.sleep(1)
         nb_tours = math.ceil(self.quantite / 10)
         for no_tour in range(1, nb_tours + 1):
-            print(f"Je mélange {self.quantite} de chocolat à fondre, tour n°{no_tour}")
-            time.sleep(1) # temps supposé d'un tour de spatule
+            print(f"Je mélange {self.quantite}g de chocolat à fondre, tour n°{no_tour}")
+            time.sleep(1)  # temps supposé d'un tour de spatule
