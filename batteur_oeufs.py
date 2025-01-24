@@ -1,15 +1,25 @@
-import threading
 import time
+from ingredient import Oeuf
 
 
-class BatteurOeufs(threading.Thread):
+from commis import Commis
 
-    def __init__(self, nb_oeufs):
-        threading.Thread.__init__(self)
-        self.nb_oeufs = nb_oeufs
+
+class BatteurOeufs(Commis):
+    def __init__(self, nom, recipient):
+        super().__init__(nom)
+        self.recipient = recipient
 
     def run(self):
-        nb_tours = self.nb_oeufs * 8
+        if not self.recipient.contenu:
+            print(f"{self.nom}: Le {self.recipient.type_recipient} est vide, rien à battre")
+            return
+
+        if not isinstance(self.recipient.contenu, Oeuf):
+            print(f"{self.nom}: Je peux battre uniquement des oeufs")
+            return
+
+        nb_tours = self.recipient.contenu.quantite * 8
         for no_tour in range(1, nb_tours + 1):
-            print(f"\tJe bats les {self.nb_oeufs} oeufs, tour n°{no_tour}")
+            print(f"\t{self.nom}: Je bats {self.recipient.contenu} dans le {self.recipient.type_recipient}, tour n°{no_tour}")
             time.sleep(0.5)  # temps supposé d'un tour de batteur

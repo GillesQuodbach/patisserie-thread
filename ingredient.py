@@ -1,25 +1,21 @@
-import threading
+from abc import ABC
 
 
-class Ingredient(threading.Thread):
-    def __init__(self, name, quantity, unit):
-        threading.Thread.__init__(self)
-        self.name = name
-        self.quantity = quantity
-        self.unit = unit
+class Ingredient(ABC):
+    def __init__(self, nom, quantite, unite):
+        self.nom = nom
+        self.quantite = quantite
+        self.unite = unite
 
-    def run(self):
-        name = self.name
-        quantity = self.quantity
-        unit = self.unit
-        print(f"\t J'ajoute {quantity}{unit} de {name}")
+    def __str__(self):
+        return f"{self.quantite} {self.unite} de {self.nom}"
 
 
 class Oeuf(Ingredient):
-    def __init__(self, quantity):
-        super().__init__("Oeuf", quantity, "pièces")
+    def __init__(self, quantite):
+        super().__init__("Oeuf", quantite, "")
 
 
 class Chocolat(Ingredient):
-    def __init__(self, quantity):
-        super().__init__("Chocolat", quantity, "grammes")
+    def __init__(self, quantite):
+        super().__init__("Chocolat", quantite, "g")
